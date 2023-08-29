@@ -5,13 +5,13 @@ const Users = () => {
   const users = useSelector((state) => state.userlist)
 
   return (
-    <table className="flex w-1/2 min-w-max my-8 relative justify-center items-center flex-col rounded-2xl border-red-950 border-2">
+    <table className="flex p-4 max-w-max min-w-fit my-8 relative justify-center items-center flex-col rounded-2xl border-red-950 border-2">
       <tbody>
         <tr>
-          <td> </td>
-          <td>
+          <th>user</th>
+          <th>
             <strong>blogs created</strong>
-          </td>
+          </th>
         </tr>
         {users.map((user) => (
           <tr key={user.username}>
