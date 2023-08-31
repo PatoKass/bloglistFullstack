@@ -11,7 +11,7 @@ const Togglable = ({ buttonLabel, children }) => {
   }
 
   return (
-    <div className=" flex justify-center align-center">
+    <div className=" flex justify-center items-center">
       <div style={hideWhenVisible}>
         <button
           id="new-blog"
@@ -21,11 +21,14 @@ const Togglable = ({ buttonLabel, children }) => {
           {buttonLabel}
         </button>
       </div>
-      <div style={showWhenVisible}>
+      <div
+        style={showWhenVisible}
+        className="flex flex-col justify-center items-center"
+      >
         {children}
         <button
           onClick={toggleVisibility}
-          className="p-2 mx-12 text-white rounded-md bg-indigo-600"
+          className=" p-2 my-12 text-white rounded-md bg-indigo-600"
         >
           cancel
         </button>

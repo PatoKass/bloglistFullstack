@@ -10,11 +10,14 @@ For the login system JSON Web Token (JWT) was implemented, and login credentials
 HOW TO RUN:
 
 - Clone this repository to your desired directory entering "git clone https://github.com/PatoKass/bloglistFullstack" in the terminal.
-- If you don't have NodeJS installed in your computer, please do so (more info on https://nodejs.dev/en/learn/how-to-install-nodejs/)
-- Get inside the newly created directory and run "npm install" in both "back" and "front" subdirectories.
-- To run the backend, enter "npm run dev" on the terminal while on the "bloglistFullstack/back" directory. This should start the server.
-- To get the frontend going, go to "bloglistFullstack/front" and run "npm start". Don't forget to start the server first or functions that require data fetching will crash!
-- If it didn't happen automatically, go to your browser and access "https://localhost:3000" to open the app.
+- You'll need a package manager (npm, yarn, pnpm) to install and run everything so if you don't have any of them yet installed globally in your computer, please do so.
+- Get inside the newly created directory and run for instance "npm i" in root (optional), back and front subdirectories.
+- IF YOU RAN THE INSTALL COMMAND ON ROOT FOLDER:
+  - you'll be able to start both the server and frontend by prompting "npm run dev" on the root.
+- IF YOU PREFFERED NOT TO:
+  - To run the backend, enter "npm run dev" on the terminal while on the "bloglistFullstack/back" directory. This should start the server.
+  - To get the frontend going, go to "bloglistFullstack/front" and run "npm start". Don't forget to start the server first or functions that require data fetching will throw errors!
+- Go to your browser and access "https://localhost:3000" to open the app, in case it didn't happen automatically.
 
 A few items/ideas to work on:
 

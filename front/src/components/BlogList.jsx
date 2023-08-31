@@ -5,12 +5,17 @@ const BlogList = () => {
   const blogs = useSelector((state) => state.blogs)
 
   if (!blogs || blogs.length === 0) {
-    return <div>No blogs found.</div>
+    return (
+      <div className="flex justify-center items-center p-8">
+        No blogs found.
+      </div>
+    )
   }
+
   let sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
 
   return (
-    <section className="flex p-4 max-w-max min-w-fit my-8 justify-center flex-col items-center rounded-2xl border-red-950 border-2">
+    <section className="flex p-4 min-w-fit my-8 justify-center flex-col items-center rounded-2xl border-red-950 border-2">
       <h2 className="p-3 my-8 text-3xl">Blogs:</h2>
       {sortedBlogs.map((blog) => (
         <div className="p-4 my-3" key={blog.id}>

@@ -1,9 +1,9 @@
-import { signup } from '../services/users'
+import { signup, login } from '../services/users'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loginUser } from '../reducers/userReducer'
 import { Link } from 'react-router-dom'
 import { setNotification } from '../reducers/notificationReducer'
+import { loginUser } from '../reducers/userReducer'
 import blogService from '../services/blogs'
 
 export const Signup = () => {
@@ -16,6 +16,7 @@ export const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault()
 
+    // step one: create user
     try {
       const user = await signup({
         username,
@@ -23,21 +24,19 @@ export const Signup = () => {
         password,
       })
 
+      console.log(user)
+    } catch (error) {
+      return dispatch(setNotification(error.response.data.error, 'error', 3))
+    }
+    //step two: log user in
+    try {
+      const user = await login({ username, password })
       blogService.setToken(user.token)
       dispatch(loginUser(user))
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
-      setUsername('')
-      setPassword('')
     } catch (error) {
-      if (error) {
-        dispatch(
-          setNotification(
-            'please give a valid username and password',
-            'error',
-            3
-          )
-        )
-      }
+      console.log(error)
+      return dispatch(setNotification(error.response.data.error, 'error', 3))
     }
   }
 
@@ -49,9 +48,7 @@ export const Signup = () => {
         id="login-form"
       >
         <h2 className="self-center my-5 text-xl ">Create new user</h2>
-        <label htmlFor="username" className="flex m-3">
-          Username
-        </label>
+
         <input
           autoFocus
           type="text"
@@ -60,10 +57,9 @@ export const Signup = () => {
           name="Username"
           autoComplete="on"
           onChange={({ target }) => setUsername(target.value)}
+          placeholder="Username"
         />
-        <label htmlFor="name" className="m-3">
-          Your name:
-        </label>
+
         <input
           type="text"
           id="name"
@@ -71,10 +67,9 @@ export const Signup = () => {
           name="Name"
           autoComplete="on"
           onChange={({ target }) => setName(target.value)}
+          placeholder="Your name"
         />
-        <label htmlFor="password" className="m-3">
-          Password
-        </label>
+
         <input
           type="password"
           id="password"
@@ -82,6 +77,7 @@ export const Signup = () => {
           name="Password"
           autoComplete="on"
           onChange={({ target }) => setPassword(target.value)}
+          placeholder="Password"
         />
         <button
           className="p-2 my-4 text-white rounded-md bg-indigo-600"
@@ -90,9 +86,9 @@ export const Signup = () => {
         >
           Sign up
         </button>
-        <aside>
+        <aside className="flex justify-center items-center">
           Already have a user?
-          <Link className="p-5 m-2 text-cyan-500" to="/login">
+          <Link className="p-3 text-cyan-500 underline" to="/login">
             Login
           </Link>
         </aside>

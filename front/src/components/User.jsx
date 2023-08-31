@@ -19,7 +19,7 @@ const User = () => {
           <ul className="my-3 list-disc">
             {user.blogs.map((blog) => (
               <li className="my-3" key={blog.title}>
-                {blog.title}{' '}
+                {blog.title}
               </li>
             ))}
           </ul>

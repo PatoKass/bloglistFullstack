@@ -51,40 +51,37 @@ const BlogForm = () => {
         onSubmit={handleSubmit}
         className=" p-12 flex justify-between flex-col items-center"
       >
-        <label htmlFor="title">
-          title
-          <input
-            autoFocus
-            className="mx-2"
-            id="title"
-            type="text"
-            name="Title"
-            value={newBlog.title}
-            onChange={handleTitle}
-          />
-        </label>
-        <label className="my-4" htmlFor="title">
-          author
-          <input
-            className="mx-2"
-            id="author"
-            type="text"
-            name="Author"
-            value={newBlog.author}
-            onChange={handleAuthor}
-          />
-        </label>
-        <label htmlFor="url">
-          url
-          <input
-            className="mx-2"
-            id="url"
-            type="text"
-            name="Url"
-            value={newBlog.url}
-            onChange={handleUrl}
-          />
-        </label>
+        <input
+          autoFocus
+          className="mx-2"
+          id="title"
+          type="text"
+          name="Title"
+          value={newBlog.title}
+          onChange={handleTitle}
+          placeholder="Title"
+        />
+
+        <input
+          className="mx-2"
+          id="author"
+          type="text"
+          name="Author"
+          value={newBlog.author}
+          onChange={handleAuthor}
+          placeholder="Author"
+        />
+
+        <input
+          className="mx-2"
+          id="url"
+          type="text"
+          name="Url"
+          value={newBlog.url}
+          onChange={handleUrl}
+          placeholder="Url"
+        />
+
         <button
           type="submit"
           className="p-2 my-4 text-white rounded-md bg-indigo-600"

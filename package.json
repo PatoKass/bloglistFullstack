@@ -1,0 +1,12 @@
+{
+  "name": "bloglist",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:front\" \"npm run dev:back\"",
+    "dev:front": "cd front && npm run dev",
+    "dev:back": "cd back && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
+}

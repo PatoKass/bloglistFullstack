@@ -17,11 +17,15 @@ usersRouter.post('/', async (req, res) => {
 
   if (!username || !name) {
     return res.status(400).json({ error: 'Name or username are missing' })
-  }
-  if (password.length < 3) {
+  } else if (password.length < 3) {
     return res
       .status(400)
       .json({ error: 'Password must be at least three characters long' })
+  }
+
+  const existingUser = await User.findOne({ username })
+  if (existingUser) {
+    return res.status(400).json({ error: 'Username already in use' })
   }
 
   const saltRounds = 10

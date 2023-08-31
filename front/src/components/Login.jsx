@@ -1,4 +1,4 @@
-import loginService from '../services/login'
+import { login } from '../services/users'
 import blogService from '../services/blogs'
 import { loginUser } from '../reducers/userReducer'
 import { useDispatch } from 'react-redux'
@@ -16,19 +16,16 @@ const Login = () => {
     e.preventDefault()
 
     try {
-      const user = await loginService.login({
+      const user = await login({
         username,
         password,
       })
+
       blogService.setToken(user.token)
       dispatch(loginUser(user))
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
-      setUsername('')
-      setPassword('')
-    } catch {
-      dispatch(
-        setNotification('please give a valid username and password', 'error', 3)
-      )
+    } catch (error) {
+      dispatch(setNotification(error.response.data.error, 'error', 3))
     }
   }
 
@@ -70,9 +67,9 @@ const Login = () => {
         >
           Login
         </button>
-        <aside>
+        <aside className="flex justify-center items-center">
           Don't have a user yet?
-          <Link className="p-5 m-2 text-cyan-500" to="/signup">
+          <Link className="p-3 text-cyan-500 underline" to="/signup">
             Sign up
           </Link>
         </aside>
