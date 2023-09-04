@@ -1,6 +1,6 @@
 This is a fullstack project I made for the FullstackOpen by University of Helsinki/Houston.inc. Works as a bloglist site where you can create your user, post blogs, see blogs posted by other users and even like or comment them! Basic CRUD functionalities are covered as well.
 
-It features a backend built with ExpressJS, utilizing tools such as nodemon, jest and CORS. It also features other installed and custom middleware
+It features a backend built with ExpressJS, utilizing tools such as nodemon, morgan (for logging), supertest (for testing, of course) and CORS. It also features other installed and custom middleware
 MongoDB and mongoose were used to connect the backend to the database, set up validations and such.
 
 As for the frontend, I used ReactJS with Redux (w/Redux Toolkit) and TailwindCSS. Some tests using react-testing-library were included. Since the design required several routes, react-router-dom was also used.
