@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setNotification } from '../reducers/notificationReducer'
 import { loginUser } from '../reducers/userReducer'
+import { initializeUserlist } from '../reducers/userlistReducer'
 import blogService from '../services/blogs'
 
 export const Signup = () => {
@@ -33,6 +34,7 @@ export const Signup = () => {
       const user = await login({ username, password })
       blogService.setToken(user.token)
       dispatch(loginUser(user))
+      dispatch(initializeUserlist())
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
     } catch (error) {
       console.log(error)

@@ -5,7 +5,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState: null,
   reducers: {
-    setUser(state, action) {
+    setUser(_, action) {
       return action.payload
     },
   },
@@ -33,13 +33,10 @@ export const loginUser = (user) => {
 }
 
 export const logoutUser = () => {
-  return async (dispatch) => dispatch(setUser(null))
+  return async (dispatch) => {
+    window.localStorage.removeItem('loggedUser')
+    dispatch(setUser(null))
+  }
 }
-
-// export const createUser = () => {
-//   return async (dispatch) => {
-
-//   }
-// }
 
 export default userSlice.reducer

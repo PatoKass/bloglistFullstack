@@ -5,7 +5,7 @@ const userlistSlice = createSlice({
   name: 'userlist',
   initialState: [],
   reducers: {
-    setUserlist(state, action) {
+    setUserlist(_, action) {
       return action.payload
     },
   },

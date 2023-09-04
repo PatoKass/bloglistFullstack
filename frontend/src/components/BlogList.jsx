@@ -20,7 +20,7 @@ const BlogList = () => {
       {sortedBlogs.map((blog) => (
         <div className="p-4 my-3" key={blog.id}>
           <Link
-            className="p-3  border-2 border-red-900 bg-red-500"
+            className="p-3 border-2 border-red-900 bg-red-500"
             to={`/blogs/${blog.id}`}
           >
             {blog.title}, by {blog.author}

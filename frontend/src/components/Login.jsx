@@ -1,6 +1,7 @@
 import { login } from '../services/users'
 import blogService from '../services/blogs'
 import { loginUser } from '../reducers/userReducer'
+import { initializeUserlist } from '../reducers/userlistReducer'
 import { useDispatch } from 'react-redux'
 import { setNotification } from '../reducers/notificationReducer'
 import { useState } from 'react'
@@ -23,6 +24,7 @@ const Login = () => {
 
       blogService.setToken(user.token)
       dispatch(loginUser(user))
+      dispatch(initializeUserlist())
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
     } catch (error) {
       dispatch(setNotification(error.response.data.error, 'error', 3))
@@ -68,7 +70,7 @@ const Login = () => {
           Login
         </button>
         <aside className="flex justify-center items-center">
-          Don't have a user yet?
+          Create your FREE user!
           <Link className="p-3 text-cyan-500 underline" to="/signup">
             Sign up
           </Link>

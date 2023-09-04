@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const usersRouter = require('express').Router()
 require('express-async-errors')
@@ -39,6 +40,16 @@ usersRouter.post('/', async (req, res) => {
 
   const savedUser = await user.save()
   res.status(201).json(savedUser)
+})
+
+usersRouter.delete('/:id', async (req, res) => {
+  const decodedToken = jwt.verify(req.token, process.env.SECRET)
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token invalid' })
+  }
+
+  await User.findByIdAndRemove(req.params.id)
+  res.status(204).end()
 })
 
 module.exports = usersRouter

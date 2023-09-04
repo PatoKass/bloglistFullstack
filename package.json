@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "concurrently \"npm run dev:front\" \"npm run dev:back\"",
-    "dev:front": "cd front && npm run dev",
+    "dev:front": "cd frontend && npm run dev",
     "dev:back": "cd back && npm run dev"
   },
   "devDependencies": {

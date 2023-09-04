@@ -40,7 +40,6 @@ const App = () => {
   }, [dispatch])
 
   const handleLogout = async () => {
-    window.localStorage.removeItem('loggedUser')
     dispatch(setNotification('logged out succesfully!', 'success', 3))
     dispatch(logoutUser())
   }
