@@ -12,7 +12,7 @@ const Nav = ({ username }) => {
   }
 
   return (
-    <div className="bg-yellow-200 flex align-top items-center justify-end">
+    <header className="bg-yellow-200 flex align-top items-center justify-end">
       <Link className="p-5 m-2 text-cyan-500" to="/">
         blogs
       </Link>
@@ -29,7 +29,7 @@ const Nav = ({ username }) => {
       >
         Logout
       </button>
-    </div>
+    </header>
   )
 }
 

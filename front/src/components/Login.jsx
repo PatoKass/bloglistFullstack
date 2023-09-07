@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { setNotification } from '../reducers/notificationReducer'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { initializeBlogs } from '../reducers/blogReducer'
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -17,27 +18,27 @@ const Login = () => {
     e.preventDefault()
 
     try {
-      const user = await login({
-        username,
-        password,
-      })
-
+      const user = await login({ username, password })
+      window.localStorage.setItem('loggedUser', JSON.stringify(user))
       blogService.setToken(user.token)
       dispatch(loginUser(user))
       dispatch(initializeUserlist())
-      window.localStorage.setItem('loggedUser', JSON.stringify(user))
+      dispatch(initializeBlogs())
+      setUsername('')
+      setPassword('')
+      dispatch(setNotification(`Welcome back ${user.name}!`, 'success', 3))
     } catch (error) {
-      dispatch(setNotification(error.response.data.error, 'error', 3))
+      dispatch(setNotification('wrong username or password', 'error', 3))
     }
   }
 
   return (
-    <div className="flex justify-center items-center">
+    <section className="flex justify-center items-center">
       <form className="flex flex-col" onSubmit={handleLogin} id="login-form">
-        <h2 className="flex self-center my-5 text-xl ">
+        <h2 className="flex self-center my-2 text-xl ">
           Log in to application
         </h2>
-        <div className="m-3">
+        <div className="m-2">
           username
           <input
             className="mx-3"
@@ -50,7 +51,7 @@ const Login = () => {
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
-        <div className="m-3">
+        <div className="m-2">
           password
           <input
             className="mx-3"
@@ -71,12 +72,12 @@ const Login = () => {
         </button>
         <aside className="flex justify-center items-center">
           Create your FREE user!
-          <Link className="p-3 text-cyan-500 underline" to="/signup">
+          <Link className="p-2 text-cyan-500 underline" to="/signup">
             Sign up
           </Link>
         </aside>
       </form>
-    </div>
+    </section>
   )
 }
 

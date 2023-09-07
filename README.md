@@ -3,7 +3,7 @@ This is a fullstack project I made for the FullstackOpen by University of Helsin
 It features a backend built with ExpressJS, utilizing tools such as nodemon, morgan (for logging), supertest (for testing, of course) and CORS. It also features other installed and custom middleware
 MongoDB and mongoose were used to connect the backend to the database, set up validations and such.
 
-As for the frontend, I used ReactJS with Redux (w/Redux Toolkit) and TailwindCSS. Some tests using react-testing-library were included. Since the design required several routes, react-router-dom was also used.
+As for the frontend, I used ReactJS with Redux (w/Redux Toolkit) and TailwindCSS. Project was originally built with create-react-app, but I migrated to ViteJS for faster development and better perfomance. I also used Axios for data fetching and will use Vitest for testing.
 
 For the login system JSON Web Token (JWT) was implemented, and login credentials are stored in browser's localstorage for a longer lasting user session, meaning if the user wants to log out, they should do so manually.
 
@@ -21,12 +21,10 @@ HOW TO RUN:
 
 A few items/ideas to work on:
 
-- Make more exhaustive tests both on front and backend.
+- Exhaustive tests both on front and backend.
 - E2E tests with cypress/playground.
 - Optimized CSS design.
-- UI Functionality for deleting users.
+- UI Functionality for deleting users (DONE!).
 - Dockerizing.
 - "Share" function to tweet (or X) your freshly posted blog.
 - Refactoring code if convenient to achieve the best perfomance, readability and mantainability.
-
-IMPORTANT: Please note this project was create-react-app which I actually don't use in my other personal projects, since as of april 2023 even though it was not yet deprecated, it's highly recommended to instead create projects using frameworks such as Vite or NextJS to name a few. But since the course exercises used create-react-app, I just followed through. I'd probably like to migrate the project to Vite in the short term.

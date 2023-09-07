@@ -4,9 +4,7 @@ import { deleteUser } from '../services/users'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '../reducers/userReducer'
 import { setNotification } from '../reducers/notificationReducer'
-
-// import { deleteBlog } from '../reducers/blogReducer'
-// import blogServices from '../services/blogs'
+import { deleteBlog } from '../reducers/blogReducer'
 
 const User = () => {
   const dispatch = useDispatch()
@@ -20,16 +18,27 @@ const User = () => {
     return null
   }
 
-  const handleDelete = () => {
-    deleteUser(token, id)
+  const handleDelete = async () => {
+    if (
+      window.confirm(
+        `delete user ${user.username}? Your blogs will be deleted as well`
+      )
+    ) {
+      try {
+        if (user.blogs && user.blogs.length > 0) {
+          const deletePromises = user.blogs.map((blog) =>
+            dispatch(deleteBlog(blog.id))
+          )
+          await Promise.all(deletePromises)
+        }
+        await deleteUser(token, id)
+        dispatch(logoutUser())
 
-    dispatch(setNotification('Your account was deleted!', 'success', 3))
-    dispatch(logoutUser())
-
-    // for (blog in user.blogs) {
-    //   deleteBlog(user.blog.id)
-    //   blogServices.remove(user.blog.id)
-    // }
+        dispatch(setNotification(`user ${user.username} deleted`, 'success', 3))
+      } catch (error) {
+        dispatch(setNotification(error.response.data.error, 'error', 3))
+      }
+    }
   }
 
   return (

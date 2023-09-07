@@ -1,12 +1,18 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
+import { addBlogToUser } from '../reducers/userlistReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
 const BlogForm = () => {
   const EMPTY_BLOG = { title: '', author: '', url: '' }
   const dispatch = useDispatch()
   const [newBlog, setNewBlog] = useState(EMPTY_BLOG)
+  const users = useSelector((state) => state.userlist)
+  const loggedUserJSON = window.localStorage.getItem('loggedUser')
+  const user = users.find(
+    (u) => u.username === JSON.parse(loggedUserJSON).username
+  )
 
   const handleTitle = (e) => {
     setNewBlog({ ...newBlog, title: e.target.value })
@@ -29,10 +35,11 @@ const BlogForm = () => {
           3
         )
       )
+      return
     }
 
     dispatch(createBlog(newBlog))
-
+    dispatch(addBlogToUser(user, newBlog))
     dispatch(
       setNotification(
         `Blog '${newBlog.title}' by ${newBlog.author} has been added `,
@@ -40,7 +47,6 @@ const BlogForm = () => {
         3
       )
     )
-
     setNewBlog(EMPTY_BLOG)
   }
 

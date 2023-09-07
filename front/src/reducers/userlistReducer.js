@@ -20,4 +20,12 @@ export const initializeUserlist = () => {
   }
 }
 
+export const addBlogToUser = (user, blog) => {
+  return async (dispatch) => {
+    const updatedUser = { ...user, blogs: user.blogs.concat(blog) }
+    await blogService.update(user.id, updatedUser)
+    dispatch(initializeUserlist())
+  }
+}
+
 export default userlistSlice.reducer

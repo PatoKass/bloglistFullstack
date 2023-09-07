@@ -8,7 +8,7 @@ const blogSlice = createSlice({
     appendBlog(state, action) {
       state.push(action.payload)
     },
-    setBlogs(state, action) {
+    setBlogs(_, action) {
       return action.payload
     },
     modifyBlog(state, action) {
@@ -23,7 +23,8 @@ export const { appendBlog, setBlogs, modifyBlog } = blogSlice.actions
 export const initializeBlogs = () => {
   return async (dispatch) => {
     const blogs = await blogService.getAll()
-    dispatch(setBlogs(blogs))
+    const filteredBlogs = blogs.filter((blog) => blog.user !== null)
+    dispatch(setBlogs(filteredBlogs))
   }
 }
 

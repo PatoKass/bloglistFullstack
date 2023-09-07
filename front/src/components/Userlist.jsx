@@ -1,8 +1,16 @@
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { initializeUserlist } from '../reducers/userlistReducer'
+import { useDispatch } from 'react-redux'
 
 const Users = () => {
   const users = useSelector((state) => state.userlist)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(initializeUserlist())
+  }, [dispatch])
 
   return (
     <table className="flex p-4 max-w-max min-w-fit my-16 relative justify-center items-center flex-col rounded-2xl border-red-950 border-2">

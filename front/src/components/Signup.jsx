@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { setNotification } from '../reducers/notificationReducer'
 import { loginUser } from '../reducers/userReducer'
 import { initializeUserlist } from '../reducers/userlistReducer'
+import { initializeBlogs } from '../reducers/blogReducer'
 import blogService from '../services/blogs'
 
 export const Signup = () => {
@@ -24,8 +25,6 @@ export const Signup = () => {
         name,
         password,
       })
-
-      console.log(user)
     } catch (error) {
       return dispatch(setNotification(error.response.data.error, 'error', 3))
     }
@@ -35,6 +34,7 @@ export const Signup = () => {
       blogService.setToken(user.token)
       dispatch(loginUser(user))
       dispatch(initializeUserlist())
+      dispatch(initializeBlogs())
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
     } catch (error) {
       console.log(error)
@@ -43,13 +43,13 @@ export const Signup = () => {
   }
 
   return (
-    <div className="flex justify-center items-center">
+    <section className="flex justify-center items-center">
       <form
-        className="flex flex-col justify-center items-center"
+        className="flex flex-col justify-center items-center max-h-min"
         onSubmit={handleSignup}
         id="login-form"
       >
-        <h2 className="self-center my-5 text-xl ">Create new user</h2>
+        <h2 className="self-center my-2 text-xl ">Create new user</h2>
 
         <input
           autoFocus
@@ -95,6 +95,6 @@ export const Signup = () => {
           </Link>
         </aside>
       </form>
-    </div>
+    </section>
   )
 }
